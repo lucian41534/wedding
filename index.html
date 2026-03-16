@@ -194,7 +194,7 @@
 
     .eyebrow {
       font-size: 15px;
-      line-height: 1.3;
+      line-height: 1.36;
       color: rgba(255,255,255,0.86);
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -266,29 +266,46 @@
       transition: opacity 900ms ease, transform 900ms cubic-bezier(.22,1,.36,1);
     }
 
-    .invitation-media .media-pane {
-      min-height: 500px;
+    .cinematic-media {
       position: relative;
-      background:
-        linear-gradient(180deg, rgba(26, 21, 18, 0.06) 6%, rgba(26, 21, 18, 0.46) 90%),
-        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+      width: min(100vw - 24px, 1020px);
+      margin-left: 50%;
+      transform: translateX(-50%);
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.24);
     }
 
-    .invitation-media .media-pane::before {
+    .cinematic-media .media-pane {
+      min-height: 560px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .cinematic-media .media-pane::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 18% 28%, rgba(248,163,188,0.3), transparent 34%),
-        radial-gradient(circle at 84% 76%, rgba(153,254,196,0.24), transparent 30%);
-      mix-blend-mode: screen;
-      opacity: 0.75;
+        linear-gradient(180deg, rgba(18, 15, 14, 0.04) 12%, rgba(18, 15, 14, 0.58) 92%),
+        radial-gradient(circle at 16% 26%, rgba(248,163,188,0.28), transparent 36%),
+        radial-gradient(circle at 82% 74%, rgba(153,254,196,0.2), transparent 34%);
+    }
+
+    .invitation-media .media-pane {
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1700&q=80');
+    }
+
+    .detail-hero .media-pane {
+      background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1700&q=80');
     }
 
     .media-overlay {
       position: absolute;
-      left: 22px;
-      right: 22px;
+      left: 24px;
+      right: 24px;
       bottom: 26px;
       color: #fff;
       z-index: 2;
@@ -421,32 +438,15 @@
     .detail-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 28px;
       margin-top: 34px;
     }
 
     .detail-hero {
       margin-top: 30px;
-      position: relative;
-      min-height: 380px;
-      border-radius: 34px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(22,19,17,0.16)),
-        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(22,19,17,0.06);
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 900ms ease, transform 900ms cubic-bezier(.22,1,.36,1);
-    }
-
-    .detail-hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 48%;
-      background: linear-gradient(180deg, rgba(22,19,17,0), rgba(22,19,17,0.42));
     }
 
     .detail-overlay-copy {
@@ -481,6 +481,9 @@
       transition: opacity 900ms ease, transform 900ms cubic-bezier(.22,1,.36,1);
       text-align: center;
       position: relative;
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
     }
 
     .detail-card::after {
@@ -503,8 +506,8 @@
 
     .detail-value {
       font-family: 'Noto Sans KR', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
-      font-size: clamp(28px, 4.7vw, 38px);
-      line-height: 1.3;
+      font-size: clamp(24px, 3.4vw, 34px);
+      line-height: 1.36;
       letter-spacing: -0.03em;
       word-break: keep-all;
       text-wrap: pretty;
@@ -733,7 +736,7 @@
 
     @media (min-width: 760px) {
       .detail-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .actions {
@@ -741,14 +744,26 @@
       }
     }
 
+    @media (min-width: 1060px) {
+      .detail-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 640px) {
-      .invitation-media .media-pane {
+      .cinematic-media {
+        width: 100%;
+        margin-left: 0;
+        transform: none;
+      }
+
+      .cinematic-media .media-pane {
         min-height: 420px;
       }
 
       .detail-value {
-        font-size: clamp(24px, 7.2vw, 32px);
-        line-height: 1.36;
+        font-size: clamp(22px, 6.5vw, 30px);
+        line-height: 1.4;
       }
 
       .visual-panel {
@@ -817,7 +832,7 @@
           </p>
         </div>
 
-        <div class="visual-panel invitation-media reveal">
+        <div class="visual-panel cinematic-media invitation-media reveal">
           <div class="media-pane">
             <div class="media-overlay">
               <span class="media-kicker">Invitation Scene</span>
@@ -854,10 +869,12 @@
           <p>깔끔하고 명확하게 필요한 정보만 전달하는 섹션입니다.</p>
         </div>
 
-        <div class="detail-hero reveal">
-          <div class="detail-overlay-copy">
+        <div class="detail-hero cinematic-media reveal">
+          <div class="media-pane">
+            <div class="detail-overlay-copy">
             <div class="kicker">Ceremony Details</div>
             <div class="headline">The day we begin<br />our forever.</div>
+            </div>
           </div>
         </div>
 
@@ -869,12 +886,12 @@
           </div>
           <div class="glass-card detail-card reveal" data-delay="2">
             <div class="detail-label">Venue</div>
-            <div class="detail-value">그랜드홀 3층<br />오로라 컨벤션</div>
+            <div class="detail-value">그랜드홀 3층 오로라 컨벤션</div>
             <div class="detail-sub">서울 서초구 예시로 123, 오로라 컨벤션</div>
           </div>
           <div class="glass-card detail-card reveal" data-delay="3">
             <div class="detail-label">Contact</div>
-            <div class="detail-value">신랑측 · 신부측<br />연락처/계좌 추가 가능</div>
+            <div class="detail-value">신랑측 · 신부측 연락처/계좌 추가 가능</div>
             <div class="detail-sub">연락처, 계좌, 복사 버튼, 토글 영역은 실제 정보 입력 시 하단에 정갈하게 확장할 수 있습니다.</div>
           </div>
         </div>
