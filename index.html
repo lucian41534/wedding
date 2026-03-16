@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>모바일 청첩장</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Parisienne&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700;800&family=Parisienne&display=swap');
 
     :root {
       --bg: #E5D7C5;
@@ -27,7 +27,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Nanum Gothic', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
       background:
         radial-gradient(circle at 18% 10%, rgba(248, 163, 188, 0.18), transparent 28%),
         radial-gradient(circle at 84% 16%, rgba(153, 254, 196, 0.14), transparent 20%),
@@ -36,6 +36,23 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.22;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23c68d9e' stroke-width='1.1' opacity='0.45'%3E%3Cpath d='M130 86c4-17 14-28 28-33-4 16-14 27-28 33zM130 86c-4-17-14-28-28-33 4 16 14 27 28 33zM130 86c15 8 22 20 23 35-14-7-22-19-23-35zM130 86c-15 8-22 20-23 35 14-7 22-19 23-35z'/%3E%3Cpath d='M130 176c6-20 18-32 34-37-6 19-18 31-34 37zM130 176c-6-20-18-32-34-37 6 19 18 31 34 37zM130 176c17 10 26 24 27 41-16-10-25-23-27-41zM130 176c-17 10-26 24-27 41 16-10 25-23 27-41z'/%3E%3Ccircle cx='130' cy='130' r='2.8' fill='%23c68d9e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),
+        radial-gradient(circle at 8% 18%, rgba(248, 163, 188, 0.16), transparent 24%),
+        radial-gradient(circle at 92% 86%, rgba(153, 254, 196, 0.12), transparent 26%);
+      background-size: 260px 260px, auto, auto;
+      background-position: center top, left top, right bottom;
+      mix-blend-mode: multiply;
     }
 
     body.is-locked {
@@ -156,6 +173,7 @@
       padding: 100px 24px 48px;
       position: relative;
       overflow: clip;
+      z-index: 2;
     }
 
     .wrap {
@@ -176,7 +194,7 @@
 
     .eyebrow {
       font-size: 15px;
-      line-height: 1.3;
+      line-height: 1.36;
       color: rgba(255,255,255,0.86);
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -248,51 +266,75 @@
       transition: opacity 900ms ease, transform 900ms cubic-bezier(.22,1,.36,1);
     }
 
-    .split-visual {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 440px;
+    .cinematic-media {
+      position: relative;
+      width: min(100vw - 24px, 1020px);
+      margin-left: 50%;
+      transform: translateX(-50%);
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.24);
     }
 
-    .split-visual .panel {
+    .cinematic-media .media-pane {
+      min-height: 560px;
       position: relative;
-      min-height: 440px;
       background-size: cover;
       background-position: center;
-      overflow: hidden;
     }
 
-    .split-visual .panel::before {
+    .cinematic-media .media-pane::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(22,19,17,0.22));
+      background:
+        linear-gradient(180deg, rgba(18, 15, 14, 0.04) 12%, rgba(18, 15, 14, 0.58) 92%),
+        radial-gradient(circle at 16% 26%, rgba(248,163,188,0.28), transparent 36%),
+        radial-gradient(circle at 82% 74%, rgba(153,254,196,0.2), transparent 34%);
     }
 
-    .split-visual .panel.left {
-      background-image:
-        linear-gradient(180deg, rgba(248,163,188,0.16), rgba(248,163,188,0.08)),
-        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80');
-      transform: translateX(-24px);
+    .invitation-media .media-pane {
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1700&q=80');
     }
 
-    .split-visual .panel.right {
-      background-image:
-        linear-gradient(180deg, rgba(153,254,196,0.14), rgba(153,254,196,0.08)),
-        url('https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80');
-      transform: translateX(24px);
+    .detail-hero .media-pane {
+      background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1700&q=80');
     }
 
-    .panel-label {
+    .media-overlay {
       position: absolute;
-      bottom: 18px;
-      left: 18px;
-      z-index: 2;
+      left: 24px;
+      right: 24px;
+      bottom: 26px;
       color: #fff;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      z-index: 2;
+      text-shadow: 0 14px 28px rgba(0,0,0,0.35);
+    }
+
+    .media-kicker {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      margin-bottom: 10px;
+      opacity: 0.9;
+      font-weight: 700;
+    }
+
+    .media-overlay h3 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 9vw, 58px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .media-overlay p {
+      margin: 14px 0 0;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.86);
     }
 
     .section-copy {
@@ -396,32 +438,15 @@
     .detail-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 28px;
       margin-top: 34px;
     }
 
     .detail-hero {
       margin-top: 30px;
-      position: relative;
-      min-height: 380px;
-      border-radius: 34px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(22,19,17,0.16)),
-        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(22,19,17,0.06);
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 900ms ease, transform 900ms cubic-bezier(.22,1,.36,1);
-    }
-
-    .detail-hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 48%;
-      background: linear-gradient(180deg, rgba(22,19,17,0), rgba(22,19,17,0.42));
     }
 
     .detail-overlay-copy {
@@ -456,6 +481,9 @@
       transition: opacity 900ms ease, transform 900ms cubic-bezier(.22,1,.36,1);
       text-align: center;
       position: relative;
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
     }
 
     .detail-card::after {
@@ -477,10 +505,12 @@
     }
 
     .detail-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(32px, 7vw, 46px);
-      line-height: 1.1;
-      letter-spacing: -0.05em;
+      font-family: 'Noto Sans KR', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+      font-size: clamp(24px, 3.4vw, 34px);
+      line-height: 1.36;
+      letter-spacing: -0.03em;
+      word-break: keep-all;
+      text-wrap: pretty;
     }
 
     .detail-sub {
@@ -632,59 +662,30 @@
       padding: 28px 20px 48px;
     }
 
-    .fade-up.show,
     .section.show .eyebrow,
-    .section.show h1,
-    .section.show .hero-sub,
-    .section.show .hero-date,
-    .section.show .section-title,
-    .section.show .names,
-    .section.show .map-card,
-    .section.show .detail-card,
-    .section.show .gallery-item,
-    .section.show .visual-panel,
-    .section.show .detail-hero {
-      opacity: 1;
-      transform: none;
-    }
-
-    .section.show .eyebrow,
-    .section.show .section-title,
-    .section.show .names,
-    .section.show .detail-card,
-    .fade-up.show {
-      animation: driftUp 1s cubic-bezier(.22,1,.36,1) both;
-    }
-
     .section.show h1,
     .section.show .hero-sub,
     .section.show .hero-date {
+      opacity: 1;
+      transform: none;
       animation: driftUp 1.1s cubic-bezier(.22,1,.36,1) both;
     }
 
-    .section.show .gallery-item,
-    .section.show .visual-panel,
-    .section.show .detail-hero {
-      animation: scaleIn 1s cubic-bezier(.22,1,.36,1) both;
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0) scale(0.98);
+      transition: opacity 850ms ease, transform 850ms cubic-bezier(.22,1,.36,1);
+      transition-delay: var(--reveal-delay, 0ms);
     }
 
-    .section.show .split-visual .panel.left {
-      animation: slideInLeft 1.15s cubic-bezier(.22,1,.36,1) both;
+    .reveal.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
     }
 
-    .section.show .split-visual .panel.right {
-      animation: slideInRight 1.15s cubic-bezier(.22,1,.36,1) both;
-    }
-
-    .section.show .map-card {
-      animation: maskReveal 1.05s cubic-bezier(.22,1,.36,1) both;
-    }
-
-    .detail-card:nth-child(2) { transition-delay: 120ms; animation-delay: 120ms; }
-    .detail-card:nth-child(3) { transition-delay: 240ms; animation-delay: 240ms; }
-    .gallery-item:nth-child(2) { transition-delay: 120ms; animation-delay: 120ms; }
-    .gallery-item:nth-child(3) { transition-delay: 220ms; animation-delay: 220ms; }
-    .gallery-item:nth-child(4) { transition-delay: 320ms; animation-delay: 320ms; }
+    .reveal[data-delay="1"] { --reveal-delay: 120ms; }
+    .reveal[data-delay="2"] { --reveal-delay: 220ms; }
+    .reveal[data-delay="3"] { --reveal-delay: 320ms; }
 
     .scroll-indicator {
       position: absolute;
@@ -732,24 +733,10 @@
       100% { transform: scale(1) translateY(0); opacity: 1; }
     }
 
-    @keyframes slideInLeft {
-      0% { opacity: 0; transform: translateX(-34px) scale(1.02); }
-      100% { opacity: 1; transform: translateX(0) scale(1); }
-    }
-
-    @keyframes slideInRight {
-      0% { opacity: 0; transform: translateX(34px) scale(1.02); }
-      100% { opacity: 1; transform: translateX(0) scale(1); }
-    }
-
-    @keyframes maskReveal {
-      0% { clip-path: inset(0 0 100% 0 round 30px); opacity: 0.6; }
-      100% { clip-path: inset(0 0 0 0 round 30px); opacity: 1; }
-    }
 
     @media (min-width: 760px) {
       .detail-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .actions {
@@ -757,13 +744,26 @@
       }
     }
 
+    @media (min-width: 1060px) {
+      .detail-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 640px) {
-      .split-visual {
-        grid-template-columns: 1fr;
+      .cinematic-media {
+        width: 100%;
+        margin-left: 0;
+        transform: none;
       }
 
-      .split-visual .panel {
-        min-height: 260px;
+      .cinematic-media .media-pane {
+        min-height: 420px;
+      }
+
+      .detail-value {
+        font-size: clamp(22px, 6.5vw, 30px);
+        line-height: 1.4;
       }
 
       .visual-panel {
@@ -823,7 +823,7 @@
 
     <section class="section" id="story">
       <div class="wrap">
-        <div class="section-title">
+        <div class="section-title reveal">
           <span class="small">Invitation</span>
           <h2>소중한 분들을 초대합니다.</h2>
           <p>
@@ -832,25 +832,28 @@
           </p>
         </div>
 
-        <div class="visual-panel fade-up">
-          <div class="split-visual">
-            <div class="panel left"><span class="panel-label">Bride</span></div>
-            <div class="panel right"><span class="panel-label">Groom</span></div>
+        <div class="visual-panel cinematic-media invitation-media reveal">
+          <div class="media-pane">
+            <div class="media-overlay">
+              <span class="media-kicker">Invitation Scene</span>
+              <h3>소중한 하루의 시작,<br />함께해 주세요.</h3>
+              <p>2026년 9월 20일 일요일 · Grand Hall</p>
+            </div>
           </div>
         </div>
 
-        <p class="section-copy">
+        <p class="section-copy reveal" data-delay="1">
           첫 인상은 가볍고 세련되게, 두 번째 인상은 오래 남도록.
           서로 다른 두 장면이 하나의 화면 안에서 자연스럽게 이어지도록 구성했습니다.
         </p>
 
         <div class="copy-grid">
-          <div class="copy-card fade-up">
+          <div class="copy-card reveal" data-delay="2">
             <span class="script-inline">With love,</span>
             바쁘신 일상 속에서도 저희의 시작을 함께 축복해 주신다면
             그 마음 오래도록 깊이 간직하겠습니다.
           </div>
-          <div class="names">
+          <div class="names reveal" data-delay="3">
             <strong>신랑 승원 · 신부 지연</strong>
             <span>양가 부모님과 함께 정중히 모십니다.</span>
           </div>
@@ -860,33 +863,35 @@
 
     <section class="section" id="details">
       <div class="wrap">
-        <div class="section-title">
+        <div class="section-title reveal">
           <span class="small">Details</span>
           <h2>한눈에 보는 예식 정보</h2>
           <p>깔끔하고 명확하게 필요한 정보만 전달하는 섹션입니다.</p>
         </div>
 
-        <div class="detail-hero fade-up">
-          <div class="detail-overlay-copy">
+        <div class="detail-hero cinematic-media reveal">
+          <div class="media-pane">
+            <div class="detail-overlay-copy">
             <div class="kicker">Ceremony Details</div>
             <div class="headline">The day we begin<br />our forever.</div>
+            </div>
           </div>
         </div>
 
         <div class="detail-grid">
-          <div class="glass-card detail-card">
+          <div class="glass-card detail-card reveal" data-delay="1">
             <div class="detail-label">Date</div>
-            <div class="detail-value">2026년 9월 20일<br />일요일 오후 12시 30분</div>
+            <div class="detail-value">2026년 9월 20일 · 일요일 오후 12시 30분</div>
             <div class="detail-sub">예식 시작 20분 전까지 도착하시면 더욱 여유롭습니다.</div>
           </div>
-          <div class="glass-card detail-card">
+          <div class="glass-card detail-card reveal" data-delay="2">
             <div class="detail-label">Venue</div>
-            <div class="detail-value">그랜드홀 3층<br />오로라 컨벤션</div>
+            <div class="detail-value">그랜드홀 3층 오로라 컨벤션</div>
             <div class="detail-sub">서울 서초구 예시로 123, 오로라 컨벤션</div>
           </div>
-          <div class="glass-card detail-card">
+          <div class="glass-card detail-card reveal" data-delay="3">
             <div class="detail-label">Contact</div>
-            <div class="detail-value">신랑측 · 신부측<br />연락처/계좌 추가 가능</div>
+            <div class="detail-value">신랑측 · 신부측 연락처/계좌 추가 가능</div>
             <div class="detail-sub">연락처, 계좌, 복사 버튼, 토글 영역은 실제 정보 입력 시 하단에 정갈하게 확장할 수 있습니다.</div>
           </div>
         </div>
@@ -895,30 +900,30 @@
 
     <section class="section" id="gallery">
       <div class="wrap">
-        <div class="section-title">
+        <div class="section-title reveal">
           <span class="small">Gallery</span>
           <h2>기억하고 싶은 장면들</h2>
           <p>실제 사진으로 교체하면 애플 제품 소개 페이지처럼 감성적인 인상을 줄 수 있습니다.</p>
         </div>
 
         <div class="gallery">
-          <div class="gallery-item" data-label="Moment 01" style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80')"></div>
-          <div class="gallery-item" data-label="Moment 02" style="background-image:url('https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80')"></div>
-          <div class="gallery-item" data-label="Moment 03" style="background-image:url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=900&q=80')"></div>
-          <div class="gallery-item" data-label="Moment 04" style="background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="gallery-item reveal" data-delay="0" data-label="Moment 01" style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="gallery-item reveal" data-delay="1" data-label="Moment 02" style="background-image:url('https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="gallery-item reveal" data-delay="2" data-label="Moment 03" style="background-image:url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="gallery-item reveal" data-delay="3" data-label="Moment 04" style="background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80')"></div>
         </div>
       </div>
     </section>
 
     <section class="section location" id="location">
       <div class="wrap">
-        <div class="section-title">
+        <div class="section-title reveal">
           <span class="small">Location</span>
           <h2>오시는 길</h2>
           <p>지도 이미지, 카카오맵/네이버지도 링크, 주차 안내까지 자연스럽게 연결할 수 있습니다.</p>
         </div>
 
-        <div class="glass-card map-card">
+        <div class="glass-card map-card reveal" data-delay="1">
           <div class="map-placeholder">
             <div>
               <strong>Aurora Convention</strong>
@@ -949,11 +954,11 @@
     const body = document.body;
     const introOverlay = document.getElementById('introOverlay');
     const sections = document.querySelectorAll('.section');
-    const fadeUps = document.querySelectorAll('.fade-up');
+    const reveals = document.querySelectorAll('.reveal');
     const topbar = document.querySelector('.topbar');
     const progress = document.querySelector('.progress');
     const floatingRsvp = document.querySelector('.floating-rsvp');
-    const parallaxNodes = document.querySelectorAll('.hero, .gallery-item, .panel, .detail-hero');
+    const parallaxNodes = document.querySelectorAll('.hero, .gallery-item, .media-pane, .detail-hero');
 
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -962,19 +967,31 @@
       }, 2550);
     });
 
-    const observer = new IntersectionObserver((entries) => {
+    const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show');
         }
       });
     }, {
-      threshold: 0.24,
+      threshold: 0.2,
       rootMargin: '0px 0px -10% 0px'
     });
 
-    sections.forEach((section) => observer.observe(section));
-    fadeUps.forEach((el) => observer.observe(el));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.18,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    sections.forEach((section) => sectionObserver.observe(section));
+    reveals.forEach((el) => revealObserver.observe(el));
 
     const onScroll = () => {
       const y = window.scrollY;
