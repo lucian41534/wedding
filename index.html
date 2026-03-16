@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FC515215DF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FC515215DF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="naver-site-verification" content="eb628bca81147b6ccd89808db6234554a3120810" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1496769592789937" crossorigin="anonymous"></script>
+  <title>휴대폰 실구매가 가격비교 계산기</title>
+  <link rel="icon" href="https://phonecal.shop/assets/favi.ico" type="image/x-icon">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="phonecal.shop">
+  <meta property="og:url" content="https://phonecal.shop/">
+  <meta property="og:title" content="휴대폰 실구매가 계산기">
+  <meta property="og:description" content="공시지원 vs 선택약정, 24개월 기준 실구매가를 한 번에 비교하세요.">
+  <meta property="og:image" content="https://phonecal.shop/assets/favi.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #222;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --primary: #2563eb;
+      --radius: 14px;
+      --shadow: 0 6px 24px rgba(0,0,0,.06);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .sub-title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 20px clamp(16px, 4vw, 28px) 80px;
+    }
+    header { padding: 18px 0 6px; }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(20px, 3.8vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    header p { margin: 0; color: var(--muted); font-size: 14px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    .field {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 14px 12px;
+      box-shadow: var(--shadow);
+    }
+    .field label {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+      margin: 0 0 6px;
+    }
+    .input, select {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 16px;
+      background: #fff;
+    }
+    .help { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.45; }
+    .calc-bar {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      gap: 10px;
+      padding: 12px clamp(16px, 4vw, 28px);
+      background: linear-gradient(180deg, rgba(248,249,250,0.0) 0%, rgba(248,249,250,1) 18%);
+      backdrop-filter: saturate(1.2) blur(6px);
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .btn-primary { background: var(--primary); color: #fff; flex: 1 1 200px; }
+    .btn-outline { background: #fff; color: var(--text); border: 1px solid var(--border); }
+    .result {
+      display: block;
+      margin-top: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      font-size: 15px;
+      line-height: 1.55;
+      /*width: 100%;*/
+    }
+    
+.result table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.result table th,
+.result table td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: right;
+}
+.result table th:first-child,
+.result table td:first-child {
+  text-align: left;
+}
+    .result h2 { margin: 0 0 10px; font-size: 18px; }
+    .result .row { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 8px 0; }
+    .result .key { color: var(--muted); }
+    .result .val { font-weight: 700; }
+    .disclaimer {
+      margin-top: 22px;
+      font-size: 14px;
+      color: var(--muted);
+      background: #fff;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .disclaimer h3 { margin: 0 0 8px; font-size: 14px; color: var(--text); }
+    .ad-wrap { display: grid; place-items: center; margin: 10px 0 0; }
+    .linkbox {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      word-break: break-all;
+      background: #fff;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .link-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>휴대폰 실구매가 가격비교 계산기</h1>
+      <p>선택약정 vs 공시지원 가격비교 계산기(공시vs선약 계산기)</p>
+      <p class="sub-title">진짜 실구매가를 알아보세요!<br/>
+        지금까지 휴대폰을 구매하면서, 많은 분들이 6개월 유지 조건을 맞추기 위해 더 많은 요금을 지불했지만, 그 추가 비용은 실제 구매가에 포함되지 않았습니다. 또한, 공시지원을 선택하면 요금 할인을 받지 못해서 더 많은 비용을 부담하게 되는데, 이 역시 구매가에 반영되지 않았습니다. <br/>
+        이제 이 계산기를 사용해 진짜 실구매가를 확인하세요. 선택약정과 공시지원을 고려한 정확한 실제 지출을 계산해, 나만의 실구매가를 알 수 있습니다.</p>
+    </header>
+
+   <ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-aoPaKBOAD3wVCyxk"
+data-ad-width = "300"
+data-ad-height = "250"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+    <section class="grid" aria-label="입력 폼">
+      <div class="field">
+        <label for="oldMonthly">기존 월정액 (부가세 포함)</label>
+        <input type="number" inputmode="numeric" step="1" min="0" class="input" id="oldMonthly" placeholder="예: 69,000" />
+        <p class="help">현재 쓰던 요금제의 1개월 요금(n개월 유지 후 이 요금제로 돌아오는 것을 가정)</p>
+      </div>
+
+      <div class="field">
+        <label for="discount">기존 할인 금액</label>
+        <input type="number" inputmode="numeric" step="1" min="0" class="input" id="discount" placeholder="예: 25,000" />
+        <p class="help">선택약정/결합으로 할인되던 금액(번호이동으로 결합할인까지 날아간다면 총 할인액 기재, 기변이라면 요금약정으로 인해 할인되던 금액만 기재(일반적으로 요금의 25%))</p>
+      </div>
+
+      <div class="field">
+        <label for="newMonthly6">신규 월정액 (n개월 유지)</label>
+        <input type="number" inputmode="numeric" step="1" min="0" class="input" id="newMonthly6" placeholder="예: 110,000" />
+        <p class="help">유지 조건인 n개월 요금제 금액</p>
+      </div>
+     
+
+      <div class="field" id="publicWrap">
+        <label for="subsidyPublic">공시지원 보조금</label>
+        <input type="number" inputmode="numeric" step="1" min="0" class="input" id="subsidyPublic" placeholder="예: 1,050,000" />
+        <p class="help">공시지원 선택 시 업자가 제공하는 총 보조금(ex) 시세표에 -5라면 기기값+5만원 기재</p>
+      </div>
+
+      <div class="field" id="planWrap">
+        <label for="subsidyPlan">선택약정 보조금</label>
+        <input type="number" inputmode="numeric" step="1" min="0" class="input" id="subsidyPlan" placeholder="예: 650,000" />
+        <p class="help">선택약정 선택 시 업자가 제공하는 총 보조금</p>
+      </div>
+
+      <div class="field">
+        <label for="devicePrice">기기값</label>
+        <input type="number" inputmode="numeric" step="1" min="0" class="input" id="devicePrice" placeholder="예: 1,199,000" />
+        <p class="help">구매하려는 기기의 출고가 또는 판매가</p>
+      </div>
+    </section>
+
+    <div class="field">
+  <label for="months">요금제 유지 기간</label>
+  <input type="number" id="months" class="input" placeholder="예: 6" value="6" min="1" />
+  <p class="help">유지 기간을 입력하세요(기본: 6개월)</p>
+</div>
+
+    <div class="calc-bar" role="group" aria-label="계산 영역">
+      <button class="btn btn-outline" id="resetBtn" type="button">초기화</button>
+      <button class="btn btn-primary" id="calcBtn" type="button">계산하기</button>
+      <button class="btn btn-outline" id="shareBtn" type="button">결과 링크 공유</button>
+      <button class="btn btn-outline" id="copyBtn" type="button">결과 링크 복사</button>
+    </div>
+
+   <output id="output" class="result" aria-live="polite" hidden>
+  <h2>계산 결과</h2>
+
+  <div class="row"><div class="key">📦 기존 24개월 요금</div><div class="val" id="old24Out">-</div></div>
+  <div class="row"><div class="key">📦 선택약정(선약) 24개월 요금</div><div class="val" id="plan24Out">-</div></div>
+  <div class="row"><div class="key">📦 공시지원 24개월 요금</div><div class="val" id="public24Out">-</div></div>
+
+  <div class="row"><div class="key">💰 선약 실구매가</div><div class="val" id="realPlanOut">-</div></div>
+  <div class="row"><div class="key">💰 공시 실구매가</div><div class="val" id="realPublicOut">-</div></div>
+
+  <table aria-label="선약 vs 공시 실구매가 비교">
+    <thead>
+      <tr><th>구분</th><th>실구매가</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>선택약정</td><td id="tblPlan">-</td></tr>
+      <tr><td>공시지원</td><td id="tblPublic">-</td></tr>
+      <tr><td><b>더 유리한 옵션</b></td><td id="tblBest">-</td></tr>
+    </tbody>
+  </table>
+
+  <div class="linkbox" id="linkBox" hidden></div>
+</output>
+
+    <div class="disclaimer" role="note" aria-label="안내 및 계산 기준">
+      <h3><b>안내 및 계산 기준</b></h3>
+      <div style="margin-top:8px">
+        단통법이 폐지에 따라 휴대폰 실구매가 계산은 필수적입니다. 본 계산기는 선택약정과 공시지원 중 어떤 방식이 유리한지 비교하기 위해 제작되었으며, 참고용입니다. 실제 구매가와 상이할 수 있습니다.<br/><br/>
+        • 기존 월정액: 기존 요금제의 1개월 요금(부가세 포함)(n개월 유지 후 이 요금제로 돌아오는 것을 가정하여 계산됨)<br/>
+        • 기존 할인 금액: 기존 요금제에서 할인되던 1개월 금액<br/>
+        • 신규 월정액(n개월 유지): 유지 조건 요금제 금액<br/>
+        • 공시지원/선약 보조금: 업자가 제공하는 총 보조금(업자 보조금 + 공식 보조금 + 차비 + 추가 지원금 등)(요금제 할인은 업자 보조금이 아님)<br/>
+          Ex) 기기값이 1000000원이고, 시세표에 공시지원금 선택시 -60000원이라고 기재되어 있다면, 공시지원 보조금은 1060000원임.<br/>
+        • 기기값: 기기 가격<br/>
+        • 요금제 유지 기간: 유지 조건 요금제의 유지 요구 기간<br/><br/>
+        계산식은 24개월 동안 폰을 바꾸지 않았을 때의 통신비와 실제로 24개월 동안 지불한 금액을 비교하여 실구매가를 산출합니다.<br/>
+        즉, 본 계산기는 신규 월정액 n개월 유지 이후, 기존 월정액에 입력한 본래 요금제로 돌아올 것을 상정하고 계산됩니다.
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const num = (v) => {
+      const n = parseInt(String(v).replace(/\D+/g, ''), 10);
+      return isNaN(n) ? 0 : n;
+    };
+
+    const krw = (v) => new Intl.NumberFormat('ko-KR').format(Math.max(0, Math.round(v))) + '원';
+
+    const el = (id) => document.getElementById(id);
+
+
+   function buildURL(includeResults = true) {
+  const url = new URL(location.href);
+  const fields = [
+    'oldMonthly','discount','newMonthly6',
+    'subsidyPublic','subsidyPlan','devicePrice','months'
+  ];
+
+  fields.forEach((id) => {
+    const value = el(id).value.trim();
+    if (value) url.searchParams.set(id, value);
+    else url.searchParams.delete(id);
+  });
+
+  if (includeResults && !el('output').hidden) {
+    const resMap = {
+      old24: el('old24Out').textContent,
+      plan24: el('plan24Out').textContent,
+      public24: el('public24Out').textContent,
+      realPlan: el('realPlanOut').textContent,
+      realPublic: el('realPublicOut').textContent,
+      best: el('tblBest').textContent
+    };
+    Object.entries(resMap).forEach(([k,v]) => {
+      if (v && v !== '-') url.searchParams.set(k, v);
+      else url.searchParams.delete(k);
+    });
+  } else {
+    ['old24','plan24','public24','realPlan','realPublic','best']
+      .forEach(k => url.searchParams.delete(k));
+  }
+
+  return url.toString();
+}
+
+   function restoreFromURL() {
+  const params = new URLSearchParams(location.search);
+  const fields = [
+    'oldMonthly','discount','newMonthly6',
+    'subsidyPublic','subsidyPlan','devicePrice','months'
+  ];
+
+  fields.forEach((id) => {
+    const v = params.get(id);
+    if (v !== null) el(id).value = v;
+  });
+
+  const hasOld = params.get('oldMonthly') !== null;
+  if (hasOld) calculate(false);
+}
+function updateLinkBox(urlStr) {
+      const linkBox = el('linkBox');
+      linkBox.hidden = true;
+    
+    }
+
+function calculate(showAlertOnMissing = true) {
+  const oldMonthly   = num(el('oldMonthly').value);
+  const discount     = num(el('discount').value);
+  const newMonthly6  = num(el('newMonthly6').value);
+  const subsidyPublic= num(el('subsidyPublic').value);
+  const subsidyPlan  = num(el('subsidyPlan').value);
+  const devicePrice  = num(el('devicePrice').value);
+  const months      = num((document.getElementById('months')||{}).value || 6) || 6;
+  const rest        = Math.max(0, 24 - months);
+
+  if (!oldMonthly || oldMonthly < 0) {
+    if (showAlertOnMissing) {
+      alert('기존 월정액을 입력해 주세요.');
+      el('oldMonthly').focus();
+    }
+    return;
+  }
+
+
+  const baseCost = Math.max(0, oldMonthly - discount);   
+  const old24    = baseCost * 24;                          
+  const plan24   = (newMonthly6 * 0.75) * months + baseCost * rest;
+  const public24 = newMonthly6 * months + oldMonthly * rest;     
+
+
+  const realPlan   = devicePrice + (plan24   - old24) - subsidyPlan;   
+  const realPublic = devicePrice + (public24 - old24) - subsidyPublic; 
+
+
+  const kr = (v) => krw(v);
+  el('old24Out').textContent     = kr(old24);
+  el('plan24Out').textContent    = kr(plan24);
+  el('public24Out').textContent  = kr(public24);
+  el('realPlanOut').textContent  = kr(realPlan);
+  el('realPublicOut').textContent= kr(realPublic);
+
+
+  const better = realPlan === realPublic
+    ? '동일'
+    : (realPlan < realPublic ? '선택약정이 유리' : '공시지원이 유리');
+  const diff = Math.abs(realPlan - realPublic);
+
+  el('tblPlan').textContent   = kr(realPlan);
+  el('tblPublic').textContent = kr(realPublic);
+  el('tblBest').textContent   = better + (diff ? ` (차이: ${kr(diff)})` : '');
+
+  el('output').hidden = false;
+
+
+  const newURL = buildURL(true);
+  history.replaceState(null, '', newURL);
+  updateLinkBox(newURL);
+  return newURL;
+}
+
+
+    async function copyLink() {
+      const url = buildURL(!el('output').hidden);
+      history.replaceState(null, '', url);
+      updateLinkBox(url);
+      try {
+        await navigator.clipboard.writeText(url);
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = '복사됨!';
+        setTimeout(() => btn.textContent = '링크 복사', 1200);
+      } catch (e) {
+        prompt('이 링크를 복사하세요:', url);
+      }
+    }
+
+    async function shareLink() {
+      const url = buildURL(!el('output').hidden);
+      history.replaceState(null, '', url);
+      updateLinkBox(url);
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: '휴대폰 실구매가 계산기', text: '입력값/결과를 공유합니다.', url });
+        } catch (e) {
+          // 사용자가 취소하거나 실패 — 무시
+        }
+      } else {
+        // 미지원 환경에서는 복사로 대체
+        copyLink();
+      }
+    }
+
+  function resetForm() {
+  ['oldMonthly','discount','newMonthly6','subsidyPublic','subsidyPlan','devicePrice','months']
+    .forEach(id => el(id).value = '');
+
+  el('output').hidden = true;
+  el('linkBox').hidden = true;
+
+  const url = new URL(location.href);
+  ['oldMonthly','discount','newMonthly6','subsidyPublic','subsidyPlan','devicePrice','months',
+   'old24','plan24','public24','realPlan','realPublic','best']
+    .forEach(k => url.searchParams.delete(k));
+  history.replaceState(null, '', url.toString());
+}
+
+    function liveUpdateURL() {
+      const url = buildURL(!el('output').hidden);
+      history.replaceState(null, '', url);
+      updateLinkBox(url);
+    }
+
+   el('calcBtn').addEventListener('click', () => calculate(true));
+el('resetBtn').addEventListener('click', resetForm);
+el('shareBtn').addEventListener('click', shareLink);
+el('copyBtn').addEventListener('click', copyLink);
+
+['oldMonthly','discount','newMonthly6','subsidyPublic','subsidyPlan','devicePrice','months']
+  .forEach(id => {
+    el(id).addEventListener('input', liveUpdateURL);
+  });
+
+
+restoreFromURL();
+  </script>
+
+  <footer style="text-align:center; padding: 20px; background-color:#f1f1f1;">
+    <p style="margin:0;">© <script>document.write(new Date().getFullYear());</script> phonecal. All Rights Reserved.</p>
+  </footer>
+  <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+  <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "1cb81019e34b420";
+    if(window.wcs) { wcs_do(); }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://blog.jagaldol.com/sitemap.xml
+
+#DaumWebMasterTool:0aaf91fe2cb91ca75cfff57f6a7da04c089a30df134b7d813cd183f720388ce7:BH1f2kcu9tGoDqVxDM/RBQ==
