@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>모바일 청첩장</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;800&family=Parisienne&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700;800&family=Parisienne&display=swap');
 
     :root {
       --bg: #E5D7C5;
@@ -27,7 +27,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Nanum Gothic', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
       background:
         radial-gradient(circle at 18% 10%, rgba(248, 163, 188, 0.18), transparent 28%),
         radial-gradient(circle at 84% 16%, rgba(153, 254, 196, 0.14), transparent 20%),
@@ -36,6 +36,23 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.22;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23c68d9e' stroke-width='1.1' opacity='0.45'%3E%3Cpath d='M130 86c4-17 14-28 28-33-4 16-14 27-28 33zM130 86c-4-17-14-28-28-33 4 16 14 27 28 33zM130 86c15 8 22 20 23 35-14-7-22-19-23-35zM130 86c-15 8-22 20-23 35 14-7 22-19 23-35z'/%3E%3Cpath d='M130 176c6-20 18-32 34-37-6 19-18 31-34 37zM130 176c-6-20-18-32-34-37 6 19 18 31 34 37zM130 176c17 10 26 24 27 41-16-10-25-23-27-41zM130 176c-17 10-26 24-27 41 16-10 25-23 27-41z'/%3E%3Ccircle cx='130' cy='130' r='2.8' fill='%23c68d9e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),
+        radial-gradient(circle at 8% 18%, rgba(248, 163, 188, 0.16), transparent 24%),
+        radial-gradient(circle at 92% 86%, rgba(153, 254, 196, 0.12), transparent 26%);
+      background-size: 260px 260px, auto, auto;
+      background-position: center top, left top, right bottom;
+      mix-blend-mode: multiply;
     }
 
     body.is-locked {
@@ -156,6 +173,7 @@
       padding: 100px 24px 48px;
       position: relative;
       overflow: clip;
+      z-index: 2;
     }
 
     .wrap {
@@ -252,6 +270,25 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 440px;
+      position: relative;
+    }
+
+    .split-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(22,19,17,0.32));
+    }
+
+    .split-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(248,163,188,0.22), transparent 44%, transparent 56%, rgba(153,254,196,0.22));
     }
 
     .split-visual .panel {
@@ -260,39 +297,55 @@
       background-size: cover;
       background-position: center;
       overflow: hidden;
+      z-index: 0;
     }
 
     .split-visual .panel::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(22,19,17,0.22));
+      background: radial-gradient(circle at center, rgba(255,255,255,0.08), rgba(22,19,17,0.28));
     }
 
     .split-visual .panel.left {
-      background-image:
-        linear-gradient(180deg, rgba(248,163,188,0.16), rgba(248,163,188,0.08)),
-        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80');
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80');
+      background-position: 30% center;
       transform: translateX(-24px);
     }
 
     .split-visual .panel.right {
-      background-image:
-        linear-gradient(180deg, rgba(153,254,196,0.14), rgba(153,254,196,0.08)),
-        url('https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80');
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80');
+      background-position: 70% center;
       transform: translateX(24px);
+    }
+
+    .split-divider {
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      bottom: 10%;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0.72), rgba(255,255,255,0));
+      transform: translateX(-50%);
+      z-index: 3;
     }
 
     .panel-label {
       position: absolute;
       bottom: 18px;
       left: 18px;
-      z-index: 2;
+      z-index: 4;
       color: #fff;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      text-shadow: 0 8px 28px rgba(0,0,0,0.38);
+    }
+
+    .panel.right .panel-label {
+      left: auto;
+      right: 18px;
     }
 
     .section-copy {
@@ -481,6 +534,8 @@
       font-size: clamp(32px, 7vw, 46px);
       line-height: 1.1;
       letter-spacing: -0.05em;
+      word-break: keep-all;
+      text-wrap: balance;
     }
 
     .detail-sub {
@@ -766,6 +821,11 @@
         min-height: 260px;
       }
 
+      .detail-value {
+        font-size: clamp(28px, 7.4vw, 38px);
+        line-height: 1.24;
+      }
+
       .visual-panel {
         min-height: auto;
       }
@@ -834,8 +894,9 @@
 
         <div class="visual-panel fade-up">
           <div class="split-visual">
-            <div class="panel left"><span class="panel-label">Bride</span></div>
-            <div class="panel right"><span class="panel-label">Groom</span></div>
+            <div class="panel left"><span class="panel-label">신부 · Bride</span></div>
+            <div class="panel right"><span class="panel-label">신랑 · Groom</span></div>
+            <div class="split-divider" aria-hidden="true"></div>
           </div>
         </div>
 
@@ -876,7 +937,7 @@
         <div class="detail-grid">
           <div class="glass-card detail-card">
             <div class="detail-label">Date</div>
-            <div class="detail-value">2026년 9월 20일<br />일요일 오후 12시 30분</div>
+            <div class="detail-value">2026년 9월 20일 · 일요일 오후 12시 30분</div>
             <div class="detail-sub">예식 시작 20분 전까지 도착하시면 더욱 여유롭습니다.</div>
           </div>
           <div class="glass-card detail-card">
